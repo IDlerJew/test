@@ -114,6 +114,7 @@ struct node* deleteNode(struct node* root, int key) {
     else if (key > root->key)
         root->right = deleteNode(root->right, key);
     else {
+
         // Если у узла один дочерний элемент или их нет
         if (root->left == NULL) {
             struct node* temp = root->right;
@@ -170,8 +171,27 @@ void find(node* root, int k,List* j) {
      find(root->left, k,j);
      find(root->right, k,j);
 }
-void delete2(node* root) {
-    if (root->key%2=0; )
+void delete2(node* root,List*p ) {
+    if (!root) return;
+    if (root->key % 2 == 0) {
+        p->push_back(root->key);
+    }
+    delete2(root->left,p);
+    delete2(root->right,p);
+
+}
+node* deletefinal(node* root) {
+    List *p=new List();
+    
+    if (!root)return nullptr;
+    delete2(root,p);
+    Node* s = p->Getfirst();
+    while (s) {
+        deleteNode(root, s->val);
+        s = s->next;
+    }
+    buildfinal(root);
+    return root;
 }
 // Тестим функции
 int main() {
@@ -189,7 +209,7 @@ int main() {
     cout << endl;
     struct node* root2 = NULL;
     root2 = buildfinal(root); //балансировка дерева через массив 
-    inorder(root2);
+    /*inorder(root2);
     deleteNode(root2, 4);  //удаление элементов 
     cout << endl;
     inorder(root2);
@@ -202,5 +222,8 @@ int main() {
         cout << "Найден" << endl;
     }
     else cout << "Не найден" << endl;
+    */
+    root2 = deletefinal(root2);
+    inorder(root2);
 
 }
