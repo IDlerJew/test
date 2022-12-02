@@ -170,6 +170,9 @@ void find(node* root, int k,List* j) {
      find(root->left, k,j);
      find(root->right, k,j);
 }
+void delete2(node* root) {
+    if (root->key%2=0; )
+}
 // Тестим функции
 int main() {
     setlocale(0, "rus");
